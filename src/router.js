@@ -5,8 +5,9 @@ import Orders from './views/Orders.vue'
 import Comments from './views/Comments'
 import Account from './views/Account'
 import ProductDetail from './views/ProductDetail'
+import Buy from './views/Buy'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -35,6 +36,11 @@ export default new Router({
       name: 'detail',
       component: ProductDetail,
     },
+    {
+      path: '/buy/:id',
+      name: 'buy',
+      component: Buy,
+    }
     // {
     //   path: '/about',
     //   name: 'about',

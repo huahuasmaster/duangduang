@@ -1,5 +1,6 @@
 <template>
-    <v-card @click="check">
+    <!--<v-card @click="check">-->
+    <v-card>
         <v-img
                 :src="dto.img"
                 aspect-ratio="1"

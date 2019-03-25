@@ -15,27 +15,24 @@
 
         <v-list >
             <v-subheader
-                    :key="item.header"
+
             >
-                {{ item.header }}
+                图书分类
             </v-subheader>
             <template v-for="(item, index) in items">
 
 
                 <v-divider
-                        v-else-if="item.divider"
                         :key="index"
                 ></v-divider>
 
                 <v-list-tile
-                        v-else
                         :key="item.title"
-                        avatar
                         @click=""
                 >
 
-                    <v-list-tile-content>
-                        <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                    <v-list-tile-content >
+                        <v-list-tile-title v-html="item.title" ></v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
             </template>
@@ -48,19 +45,49 @@
         data() {
             return {
                 items: [
-                    {header: '图书分类'},
                     {
                         title: '教育',
                     },
-                    {divider: true, inset: true},
                     {
                         title: '小说 ',
                     },
-                    {divider: true, inset: true},
                     {
-                        title: 'Oui oui',
-                    }
-                ]
+                        title: '文艺',
+                    },
+                    {
+                        title: '青春文学',
+                    },
+                    {
+                        title: '童书',
+                    },
+                    {
+                        title: '人文社科',
+                    },
+                    {
+                        title: '经管',
+                    },
+                    {
+                        title: '励志',
+                    },
+                    {
+                        title: '生活',
+                    },
+                    {
+                        title: '英文原版',
+                    },
+                    {
+                        title: '科幻',
+                    },
+                    {
+                        title: '期刊影像',
+                    },
+                    {
+                        title: 'duangduang出品',
+                    },
+                    {
+                        title: '创意文具',
+                    },
+                ],
             }
         }
     }
