@@ -53,11 +53,13 @@
                 title: '都挺好（套装共两册）',
                 desc: '《大江大河》《欢乐颂》作者、高人气畅销书作家阿耐扛鼎力作！同名影视剧由正午阳光打造，姚晨、杨祐宁、彭昱畅领衔主演！',
             },
-            goBuying() {
-                this.$router.push({path:`/buy/${this.id}`});
-            },
 
         }),
+        methods: {
+            goBuying: function () {
+                this.$router.push({path:`/buy/${this.id}`});
+            },
+        }
 
 
     }
