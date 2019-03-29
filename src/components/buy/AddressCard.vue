@@ -1,7 +1,8 @@
 <template>
-    <v-card style="padding: 8px">
+    <v-card style="padding: 8px"
+    >
         <div class="name">{{dto.name}} <span>{{dto.tel}}</span></div>
-        <p>{{dto.address}}</p>
+        <p class="address">{{dto.address}}</p>
     </v-card>
 </template>
 <script>
@@ -11,7 +12,9 @@
                 name: '小明',
                 tel: '15897391872',
                 address: '中国 浙江 杭州市 西湖区 留下街道'
-            }
+            },
+            chosen: true,
+
         }),
     }
 </script>
@@ -26,7 +29,7 @@
     .name span {
         float: right;
     }
-    p {
+    .address {
         line-height: 22px;
         height: 22px;
         overflow: hidden;
