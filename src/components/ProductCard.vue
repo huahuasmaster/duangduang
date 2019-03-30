@@ -7,7 +7,7 @@
         ></v-img>
 
             <div style="padding-left: 12px">
-                <p class="name">{{dto.name}}</p>
+                <p class="name1">{{dto.name}}</p>
                 <p class="author">{{authorText}}</p>
                 <p class="price">
                     <span class="rob">${{dto.price}}</span>
@@ -47,7 +47,7 @@
     }
 </script>
 <style>
-    p.name {
+    p.name1 {
         padding-left: 8px;
         padding-right: 8px;
         margin-bottom: 0;

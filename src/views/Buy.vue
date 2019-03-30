@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-md>
+    <v-container grid-list-md style="padding: 0px">
         <v-layout justify-center wrap>
             <v-flex>
                 <v-stepper v-model="e1">
@@ -43,16 +43,14 @@
                         </v-stepper-content>
 
                         <v-stepper-content step="3">
-                            <Pay></Pay>
+                            <Pay v-on:platform_change="(id) => {this.chosenPlatformId = id}"></Pay>
 
                             <v-btn
                                     color="primary"
-                                    @click="e1 = 1"
+                                    @click="doPaying"
                             >
-                                完成
+                                确认支付
                             </v-btn>
-
-                            <v-btn flat>取消</v-btn>
                         </v-stepper-content>
                     </v-stepper-items>
                 </v-stepper>
@@ -76,6 +74,24 @@
         data: () => ({
             e1: 2,
             paying: false,
+            chosenPlatformId: 1, //默认支付宝
         }),
+        methods: {
+            doPaying: function () {
+                console.log(`选中了${this.chosenPlatformId}`);
+            }
+        }
     }
 </script>
+<style type="text/css">
+    h1.title1 {
+        font-size: 15px;
+        color: #000;
+        line-height: 22px;
+        font-weight: bold;
+
+    }
+    span .price1 {
+        font-size: 18px;width: 100px;display: inline-block;color: #ff2832;
+    }
+</style>

@@ -45,6 +45,7 @@
                             :key="address.id"
                             xs12
                             md2
+                            style="margin-right: 8px"
                     >
                         <v-item>
                             <v-card
@@ -68,7 +69,7 @@
                 </v-layout>
             </v-container>
         </v-item-group>
-        <h1 class="title">支付方式</h1>
+        <h1 class="title1">支付方式</h1>
         <v-item-group >
             <v-container grid-list-md>
                 <v-layout wrap>
@@ -77,6 +78,9 @@
                             :key="method.id"
                             xs12
                             md1
+                            style="margin-right: 8px"
+
+
                     >
                         <v-item>
                             <v-btn slot-scope="{ active, toggle }"
@@ -88,15 +92,15 @@
                 </v-layout>
             </v-container>
         </v-item-group>
-        <h1 class="title">发票</h1>
-        <v-switch v-model="needInoice" label="需要开发票" style="margin-left: 24px"></v-switch>
+        <h1 class="title1">发票</h1>
+        <v-switch v-model="needInvoice" label="需要开发票" style="margin-left: 24px"></v-switch>
         <v-container grid-list-md>
             <v-layout justify-end wrap style="border-top: 1px solid #e6e6e6;">
                 <v-flex md2>
                     <div class="border">
                         <p style="margin: 0px"><span style="width: 125px;display: inline-block;">商品金额:</span><span style="width: 100px;display: inline-block;">66.7</span></p>
                         <p style="margin: 0px;border-bottom: 1px solid #e6e6e6;"><span style="width: 125px;display: inline-block;">运费:</span><span style="width: 100px;display: inline-block;">0</span></p>
-                        <p ><span style="font-size: 14px;width: 125px;display: inline-block;">应付金额:</span><span style="font-size: 18px;width: 100px;display: inline-block;color: #ff2832;">66.7</span></p>
+                        <p ><span style="font-size: 14px;width: 125px;display: inline-block;">应付金额:</span><span style="font-size: 18px;color: #ff2832;">66.7</span></p>
                     </div>
                 </v-flex>
             </v-layout>
@@ -176,17 +180,12 @@
         white-space: normal;
         padding: 0 0 0 8px;
     }
-    h1.title {
-        font-size: 16px;
-        color: #000;
-        line-height: 22px;
-        font-weight: bold;
 
-    }
     .border {
 
         padding: 5px 0;
         width: 228px;
         display: inline-block;
     }
+
 </style>
