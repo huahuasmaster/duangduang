@@ -6,6 +6,12 @@ export const instance = axios.create({
 
 export const User = {
     test() {
-        return instance.get('/duangduang/api/user/test');
+        return instance.get('/duangduang/api/users/test');
     }
+};
+
+export const Book = {
+    list: () => {
+        return instance.get('/duangduang/api/books');
+    },
 }

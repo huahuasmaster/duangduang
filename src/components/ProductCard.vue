@@ -1,17 +1,17 @@
 <template>
     <!--<v-card @click="check">-->
-    <v-card style="cursor: pointer">
+    <v-card style="cursor: pointer;padding-bottom: 1px">
         <v-img
-                :src="dto.img"
+                :src="book.img"
                 aspect-ratio="1"
         ></v-img>
 
             <div style="padding-left: 12px">
-                <p class="name1">{{dto.name}}</p>
-                <p class="author">{{authorText}}</p>
+                <p class="name1">{{book.name}}</p>
+                <p class="author">{{`${book.author}  著`}}</p>
                 <p class="price">
-                    <span class="rob">${{dto.price}}</span>
-                    <span class="r">$100</span>
+                    <span class="rob">￥{{book.price}}</span>
+                    <span class="r">￥{{book.fakePrice}}</span>
                 </p>
                 <!--<span class="price" style="color: #aaa; text-decoration: line-through">$100</span>-->
             </div>
@@ -24,25 +24,19 @@
 </template>
 <script>
     export default {
-        // props: ['dto'],
+        props: ['book'],
         computed: {
           authorText() {
-              return `${this.dto.authorName}  著`;
+              return `${this.book.author}  著`;
           },
         },
         methods: {
             check() {
-                this.$router.push({path:`/detail/${this.dto.id}`});
-            }
+                this.$router.push({path:`/detail/${this.book.id}`, params:{book: this.book}});
+            },
         },
         data: () => ({
-            dto: {
-                img: 'http://img3m8.ddimg.cn/78/2/26475648-1_l_2.jpg',
-                name: '给孩子一个世界',
-                authorName: '译名',
-                price: 90,
-                id: 3,
-            }
+
         })
     }
 </script>
@@ -52,7 +46,7 @@
         padding-right: 8px;
         margin-bottom: 0;
         overflow: hidden;
-        font-size: 18px;
+        font-size: 17px;
         text-align: left;
 
     }

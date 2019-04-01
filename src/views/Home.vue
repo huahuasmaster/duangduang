@@ -1,18 +1,18 @@
 <template>
     <div>
         <v-container grid-list-md text-xs-center style="padding: 0px">
-            <v-layout justify-start raw wrap>
+            <v-layout justify-center raw wrap>
                 <v-flex xl2 lg2 md2>
                     <SideBar></SideBar>
                 </v-flex>
-                <v-flex xl10 lg10 md10>
+                <v-flex xl8 lg8 md8>
                     <!--<v-layout justify-start raw></v-layout>-->
-                    <v-layout justify-center raw wrap>
+                    <v-layout justify-start raw wrap>
                         <v-flex lg12 md12 xl12>
                             <Carousels></Carousels>
                         </v-flex>
-                        <v-flex @click="check(i)" v-for="i in 24" :key="`4${i}`" xs6 lg2 md2 xl2>
-                            <ProductCard>
+                        <v-flex @click="check(book.id)" v-for="book in books" :key="`book${book.id}`" xs6 lg2 md2 xl2>
+                            <ProductCard :book="book">
                             </ProductCard>
                         </v-flex>
                     </v-layout>
@@ -30,7 +30,7 @@
     import Carousels from '../components/Carousels';
     import SideBar from '../components/SideBar';
     import ProductDetail from "./ProductDetail";
-    import {User} from "../url";
+    import {Book} from "../url";
 
     export default {
 
@@ -41,6 +41,7 @@
             drawer: false,
             checkDetail: false,
             currentProductId: -1,
+            books: [],
 
         }),
         methods: {
@@ -51,10 +52,10 @@
             },
         },
         mounted() {
-            User.test()
+            Book.list()
                 .then((resp) => {
-                    console.log(resp.data);
-                })
+                    this.books = resp.data;
+                });
         }
 
     }
