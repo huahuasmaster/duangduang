@@ -23,14 +23,14 @@
     <!--</v-container>-->
     <v-card>
         <v-img
-                :src="dto.imgSrc"
+                :src="book.img"
                 aspect-ratio="2.75"
         ></v-img>
 
         <v-card-title primary-title>
             <div>
-                <h3 class="headline mb-0">{{dto.title}}</h3>
-                <div> {{dto.desc}}</div>
+                <h3 class="headline mb-0">{{book.title}}</h3>
+                <div> {{book.desc}}</div>
             </div>
         </v-card-title>
 
@@ -43,18 +43,14 @@
 <script>
 
     export default {
-        props:[],
+        props:['book'],
 
         data: () => ({
 
             drawer: false,
             // id: this.$route.params.id,
             // book: this.$route.params.book,
-            dto: {
-                imgSrc: 'http://img3m5.ddimg.cn/70/28/26445445-1_u_4.jpg',
-                title: '都挺好（套装共两册）',
-                desc: '《大江大河》《欢乐颂》作者、高人气畅销书作家阿耐扛鼎力作！同名影视剧由正午阳光打造，姚晨、杨祐宁、彭昱畅领衔主演！',
-            }
+
 
         }),
         methods: {

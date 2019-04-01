@@ -2,6 +2,7 @@
 
   <v-app id="inspire">
 
+
     <!--侧边栏-->
     <v-navigation-drawer
 
@@ -95,6 +96,16 @@
 
     <!--内容-->
     <v-content>
+      <v-snackbar :color="$store.state.type" :value = "$store.state.showAlert" top right>
+        {{$store.state.content}}
+        <v-btn
+                flat
+                @click="$store.commit('cancelAlert')"
+        >
+          好的
+        </v-btn>
+      </v-snackbar>
+<!--      <v-alert :type="info" :value = "true" dismissible>xixixi</v-alert>-->
 
       <v-container fluid fill-height>
 
@@ -119,6 +130,7 @@
       <!--<span class="white&#45;&#45;text">&copy; 2017</span>-->
 
     <!--</v-footer>-->
+
 
   </v-app>
 

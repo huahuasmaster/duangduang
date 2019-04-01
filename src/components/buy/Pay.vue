@@ -24,6 +24,7 @@
                             :key="platform.id"
                             xs12
                             md1
+                            lg2
                             style="margin-right: 8px"
                     >
                         <v-item>

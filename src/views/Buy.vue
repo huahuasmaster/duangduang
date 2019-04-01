@@ -23,20 +23,25 @@
                                     color="primary"
                                     @click="e1 = 2"
                             >
-                                下单
+                                选好了
                             </v-btn>
 
                             <v-btn flat>取消</v-btn>
                         </v-stepper-content>
 
                         <v-stepper-content step="2">
-                            <OrderConfirm></OrderConfirm>
+                            <OrderConfirm
+                                    v-on:address_change="(id) => chosenAddressId = id"
+                                    v-on:pay_type_change="(id) => chosenPayType = id"
+                                    v-on:needInvoice="(need) => needInvoice = need"
+                            ></OrderConfirm>
 
                             <v-btn
                                     color="primary"
-                                    @click="e1 = 3"
+                                    @click="placeOrder"
+                                    :loading="waitingForOrder"
                             >
-                                购买
+                                下单
                             </v-btn>
 
                             <v-btn flat>取消</v-btn>
@@ -75,11 +80,24 @@
             e1: 2,
             paying: false,
             chosenPlatformId: 1, //默认支付宝
+            chosenAddressId: -1,
+            chosenPayType: 1,
+            needInvoice: false,
+            waitingForOrder: false
         }),
         methods: {
             doPaying: function () {
                 console.log(`选中了${this.chosenPlatformId}`);
-            }
+            },
+            // 下单
+            placeOrder() {
+                console.log(`address:${this.chosenAddressId} chosenpaytype:${this.chosenPayType} needinvoice:${this.needInvoice}`);
+                this.waitingForOrder = true;
+                setTimeout(() => {
+                    this.e1 = 3;
+                    this.waitingForOrder = false;
+                }, 3000)
+            },
         }
     }
 </script>

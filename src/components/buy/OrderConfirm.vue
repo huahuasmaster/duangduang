@@ -37,7 +37,7 @@
         <!--</v-container>-->
     <!--</v-item-group>-->
 
-        <v-item-group >
+        <v-item-group v-model="chosenAddressIndex">
             <v-container grid-list-md>
                 <v-layout wrap>
                     <v-flex
@@ -45,17 +45,19 @@
                             :key="address.id"
                             xs12
                             md2
+                            lg3
                             style="margin-right: 8px"
                     >
                         <v-item>
                             <v-card
-                                    :style="{padding : '8px', color : active ? '#FFF' : '#000'}"
+                                    :style="{padding : '8px 8px 4px 8px', color : active ? '#FFF' : '#000'}"
                                     slot-scope="{ active, toggle }"
                                     :color="active ? 'primary' : '#FFFFFF'"
                                     @click="toggle"
                             >
                                 <div class="name">{{address.name}} <span>{{address.tel}}</span></div>
-                                <p class="address">{{address.address}}</p>
+                                <p class="address">{{address.province}} {{address.city}} {{address.district}}</p>
+                                <p class="address" style="line-height: 10px">{{address.street}}</p>
                                 <v-scroll-y-transition>
                                     <div
                                             v-if="active"
@@ -70,7 +72,7 @@
             </v-container>
         </v-item-group>
         <h1 class="title1">支付方式</h1>
-        <v-item-group >
+        <v-item-group v-model="chosenPayTypeIndex">
             <v-container grid-list-md>
                 <v-layout wrap>
                     <v-flex
@@ -78,6 +80,7 @@
                             :key="method.id"
                             xs12
                             md1
+                            lg1
                             style="margin-right: 8px"
 
 
@@ -109,31 +112,14 @@
     </div>
 </template>
 <script>
-    // import AddressCard from "./AddressCard";
+    import {Address} from "../../url";
     export default {
         // components: {AddressCard}
         data: () => ({
-            adds: [
-                {
-                    id:1,
-                    name: '小明',
-                    tel: '15897391872',
-                    address: '中国 浙江 杭州市 西湖区 留下街道'
-                },
-                {
-                    id:3,
-                    name: '小明',
-                    tel: '15897391872',
-                    address: '中国 浙江 杭州市 西湖区 留下街道'
-                },
-                {
-                    id:2,
-                    name: '小明',
-                    tel: '15897391872',
-                    address: '中国 浙江 杭州市 西湖区 留下街道'
-                },
-            ],
+            adds: [],
             la: [2],
+            chosenAddressIndex: 0,
+            chosenPayTypeIndex: 0,
             payMethods: [
                 {
                     id: 1,
@@ -155,10 +141,30 @@
             needInvoice: false,
 
         }),
+        watch: {
+            chosenAddressIndex(to, from) {
+                this.$emit('address_change', this.adds[to].id);
+            },
+            chosenPayTypeIndex(to, from) {
+                this.$emit('pay_type_change', this.payMethods[to].id);
+            },
+            needInvoice(to, from) {
+                this.$emit('needInvoice', to);
+            },
+        },
         methods: {
             test: function (id) {
                 console.log(id);
             }
+        },
+        mounted() {
+            let userId = this.$store.state.userId;
+            console.log(`userId = ${userId}`);
+
+            Address.listByUserId(userId)
+                .then((resp) => {
+                    this.adds = resp;
+                })
         }
     }
 </script>
@@ -174,8 +180,8 @@
         float: right;
     }
     .address {
-        line-height: 22px;
-        height: 22px;
+        /*line-height: 20px;*/
+        /*height: 20px;*/
 
         white-space: normal;
         padding: 0 0 0 8px;
