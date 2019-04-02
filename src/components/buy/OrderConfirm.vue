@@ -101,9 +101,9 @@
             <v-layout justify-end wrap style="border-top: 1px solid #e6e6e6;">
                 <v-flex md2>
                     <div class="border">
-                        <p style="margin: 0px"><span style="width: 125px;display: inline-block;">商品金额:</span><span style="width: 100px;display: inline-block;">66.7</span></p>
+                        <p style="margin: 0px"><span style="width: 125px;display: inline-block;">商品金额:</span><span style="width: 100px;display: inline-block;">{{book.price}}</span></p>
                         <p style="margin: 0px;border-bottom: 1px solid #e6e6e6;"><span style="width: 125px;display: inline-block;">运费:</span><span style="width: 100px;display: inline-block;">0</span></p>
-                        <p ><span style="font-size: 14px;width: 125px;display: inline-block;">应付金额:</span><span style="font-size: 18px;color: #ff2832;">66.7</span></p>
+                        <p ><span style="font-size: 14px;width: 125px;display: inline-block;">应付金额:</span><span style="font-size: 18px;color: #ff2832;">{{book.price}}</span></p>
                     </div>
                 </v-flex>
             </v-layout>
@@ -115,6 +115,7 @@
     import {Address} from "../../url";
     export default {
         // components: {AddressCard}
+        props: ['book'],
         data: () => ({
             adds: [],
             la: [2],
@@ -164,7 +165,9 @@
             Address.listByUserId(userId)
                 .then((resp) => {
                     this.adds = resp;
-                })
+                    this.$emit('address_change', this.adds[0].id);
+                });
+
         }
     }
 </script>

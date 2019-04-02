@@ -5,10 +5,11 @@ module.exports = {
         disableHostCheck: true,
         proxy: {
             '/duangduang/api': {
-                target: 'http://localhost:8083',
+                target: 'http://localhost:18083',
                 ws: true,
                 changeOrigin: true
             },
-        }
+        },
+        port:18080
     },
 }

@@ -5,11 +5,11 @@
                 <v-card color="#f5f5f5" style="padding: 24px" elevation="0">
                     <span style="width: 280px;display: inline-block;">
                         支付金额：
-                        <span style="font-size: 18px;padding-left: 10px;color: #ff2832;">￥77.6</span>
+                        <span style="font-size: 18px;padding-left: 10px;color: #ff2832;">￥{{book.price}}</span>
                     </span>
                     <span style="display: inline-block;">
                         订单号：
-                       <a style="text-decoration: none;color: #1976d2;">37814193715</a>
+                       <a style="text-decoration: none;color: #1976d2;">{{orderNum}}</a>
                     </span>
                     <div></div>
                 </v-card>
@@ -54,7 +54,9 @@
     import kq from '../../assets/kuaiqian.gif';
     import hb from '../../assets/mayihb.gif';
 
+
     export default {
+        props: ['orderNum','book'],
         watch: {
             chosenPlatformIndex: function() {
                 this.$emit('platform_change', this.platforms[this.chosenPlatformIndex].id)

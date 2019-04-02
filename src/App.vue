@@ -90,7 +90,7 @@
 
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
 
-      <v-toolbar-title>DuangDuang.com</v-toolbar-title>
+      <v-toolbar-title :to="'/'">DuangDuang.com</v-toolbar-title>
 
     </v-toolbar>
 

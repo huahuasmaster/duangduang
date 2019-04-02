@@ -7,6 +7,7 @@ export const instance = axios.create({
     // axios 实例配置，如没有其他配置项，可以置空
 });
 
+// 错误拦截
 instance.interceptors.response.use(
     (resp) => {
             // 判断是否正常
@@ -20,10 +21,11 @@ instance.interceptors.response.use(
     error => {
         console.log('error');
         console.log(error);
-        console.log(JSON.stringify(error));
+        console.log(JSON.stringify(error));// No message available
+        let message = JSON.parse(JSON.stringify(error)).response.status.message;
         let text = JSON.parse(JSON.stringify(error)).response.status === 404
             ? '访问的资源不存在'
-            : '网络异常，请重试';
+            : message === 'No message available' ? "网络出错，请重试" : message;
         store.dispatch('alert', {type: "error", content: text});
         return Promise.reject(error)
 
@@ -40,6 +42,7 @@ export const Book = {
     list: () => {
         return instance.get('/duangduang/api/books');
     },
+    get: id => instance.get(`/duangduang/api/books/${id}`),
 };
 
 export const Address = {
@@ -47,3 +50,10 @@ export const Address = {
         return instance.get(`/duangduang/api/users/${userId}/addresses`);
     },
 };
+
+export const Order = {
+    place: (params) => {
+        return instance.post('duangduang/api/orders', params, {});
+    },
+    pay: (id, params) => instance.put(`duangduang/api/orders/${id}/payStatus`, params, {}),
+}

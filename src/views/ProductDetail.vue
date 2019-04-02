@@ -45,17 +45,15 @@
     export default {
         props:['book'],
 
-        data: () => ({
-
-            drawer: false,
-            // id: this.$route.params.id,
-            // book: this.$route.params.book,
-
-
-        }),
+        data() {
+            return {
+                drawer: false,
+            }
+        },
         methods: {
             goBuying: function () {
-                this.$router.push({path:`/buy/${this.id}`});
+                this.$router.push({path:`/buy/${this.book.id}`});
+                // this.$router.push({name: 'buy', params: {id: this.book.id, book: this.book}});
             },
         }
 
