@@ -47,6 +47,7 @@
         methods: {
             check(book) {
                 // console.log("点击了"+id);
+                this.$log("check_book",this,{book});
                 this.currentProduct = book;
                 this.checkDetail = true;
             },
@@ -56,6 +57,7 @@
                 .then((resp) => {
                     this.books = resp;
                 });
+            this.$log("at_home", this);
         }
 
     }

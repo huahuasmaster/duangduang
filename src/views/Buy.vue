@@ -45,7 +45,7 @@
                                 下单
                             </v-btn>
 
-                            <v-btn flat @click="$router.push('/')">取消</v-btn>
+                            <v-btn flat @click="cancelPlaceOrder">取消</v-btn>
                         </v-stepper-content>
 
                         <v-stepper-content step="3">
@@ -59,7 +59,7 @@
                                     color="primary"
                                     @click="payOrder"
                                     :loading="waitingForPay"
-                                    :disabled="alredyPaid"
+                                    :disabled="alreadyPaid"
                             >
                                 确认支付
                             </v-btn>
@@ -96,10 +96,15 @@
                 waitingForPay: false,
                 book: {},
                 orderNum: '',
-                alredyPaid: false,
+                alreadyPaid: false,
             }
         },
         methods: {
+            //取消下单
+            cancelPlaceOrder() {
+                this.$log('cancel_place_order', this, {book:this.book})
+                this.$router.push('/');
+            },
             // 下单
             placeOrder() {
                 this.waitingForOrder = true;
@@ -113,16 +118,19 @@
                 };
                 console.log(`即将提交的订单$`);
                 console.log(params);
+                this.$log("try_place_order", this, {params});
                 Order.place(params)
                     .then((resp) => {
                         this.orderNum = resp;
                         console.log(`下单成功，订单号：${this.orderNum}`);
                         this.$store.dispatch('alert', {type: 'info', content: "下单成功，请及时支付"});
+                        this.$log("place_order_success", this, {params});
                         this.e1 = 3;
                         this.waitingForOrder = false;
                     }).catch(() => {
                     this.waitingForOrder = false;
-                })
+                    this.$log("place_order_fail", this, {params});
+                });
             },
             payOrder() {
                 this.waitingForPay = true;
@@ -135,12 +143,14 @@
                     payId: this.chosenPayType,
                 };
 
+                this.$log("try_pay", this, {params});
                 Order.pay(this.orderNum, params)
                     .then((resp) => {
                         console.log("下单成功");
                         this.$store.dispatch('alert', {type: 'success', content: "支付成功，稍后返回首页"});
+                        this.$log("pay_success", this, {params});
                         this.waitingForPay = false;
-                        this.alredyPaid = true;
+                        this.alreadyPaid = true;
                         setTimeout(() => {
                             this.$router.push("/");
                         }, 2000)

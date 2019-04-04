@@ -56,4 +56,10 @@ export const Order = {
         return instance.post('duangduang/api/orders', params, {});
     },
     pay: (id, params) => instance.put(`duangduang/api/orders/${id}/payStatus`, params, {}),
+};
+
+export const Bury = {
+    bury: (params) => {
+        return instance.post("/duangduang/api/buries", params)
+    },
 }

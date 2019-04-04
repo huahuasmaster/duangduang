@@ -52,6 +52,7 @@
         },
         methods: {
             goBuying: function () {
+                this.$log("go_buying", this, {book:this.book});
                 this.$router.push({path:`/buy/${this.book.id}`});
                 // this.$router.push({name: 'buy', params: {id: this.book.id, book: this.book}});
             },
